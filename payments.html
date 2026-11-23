@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Payments · AguaVita</title>
+  <link rel="stylesheet" href="css/app.css">
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+<div class="app">
+
+  <!-- paste SIDEBAR here (Payments link = class="active") -->
+
+  <div class="main">
+    <!-- paste TOPBAR here -->
+
+    <main class="content">
+      <div class="page-head">
+        <div>
+          <h1>Payments &amp; balances</h1>
+          <p class="sub">Record payments and keep customer balances up to date.</p>
+        </div>
+        <div class="actions">
+          <button class="btn-outline" id="exportBtn">Export</button>
+          <button class="btn" id="recordBtn">+ Record payment</button>
+        </div>
+      </div>
+
+      <section class="stats">
+        <article class="card stat"><div><span>Collected today</span><b id="pCollected">–</b><small class="link-s" id="pPaidCount"></small></div></article>
+        <article class="card stat"><div><span>Outstanding balances</span><b id="pOutstanding">–</b><small class="link-s" id="pCustomers"></small></div></article>
+        <article class="card stat"><div><span>Partial payments</span><b id="pPartial">–</b><small class="link-s">Included in unpaid balances</small></div></article>
+        <article class="card stat"><div><span>Deposit funds held</span><b id="pDeposits">–</b><small class="link-s">Tracked separately from sales</small></div></article>
+      </section>
+
+      <div class="toolbar">
+        <div class="chips" id="chips">
+          <button class="chip on" data-f="all">All payments</button>
+          <button class="chip" data-f="Unpaid">Unpaid</button>
+          <button class="chip" data-f="Partial">Partial</button>
+          <button class="chip" data-f="Paid">Paid</button>
+        </div>
+        <div class="toolbar-right">
+          <input id="q" class="plain" type="search" placeholder="Search receipt or customer">
+          <button class="btn-outline">Filter</button>
+        </div>
+      </div>
+
+      <section class="card flush">
+        <h3 class="pad">Payment records</h3>
+        <div class="table-wrap">
+          <table class="roomy">
+            <thead><tr><th>Order / customer</th><th>Order total</th><th>Amount paid</th><th>Balance</th><th>Status</th><th>Last payment</th><th>Action</th></tr></thead>
+            <tbody id="rows"></tbody>
+          </table>
+        </div>
+        <div class="pager">
+          <small id="showing"></small>
+          <div><button class="btn-outline" id="prev">Previous</button>
+               <span class="pg" id="pg">1</span>
+               <button class="btn-outline" id="next">Next</button></div>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<!-- Record payment -->
+<dialog id="payDlg">
+  <form id="payForm" method="dialog">
+    <h3>Record payment</h3>
+    <label>Order
+      <select id="orderSel" required></select>
+    </label>
+    <div class="total-row"><span>Balance due</span><b id="dueAmt">₱0</b></div>
+    <label>Amount received (₱)
+      <input id="amount" type="number" min="1" step="1" required>
+    </label>
+    <label>Payment date
+      <input id="payDate" type="date" required>
+    </label>
+    <p id="formErr" class="err" hidden></p>
+    <div class="actions end">
+      <button type="button" class="btn-outline" id="cancelPay">Cancel</button>
+      <button class="btn" type="submit">Save payment</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- Receipt -->
+<dialog id="rcpDlg">
+  <div class="receipt">
+    <h3>Payment receipt</h3>
+    <dl>
+      <div><dt>Order</dt><dd id="rOrder"></dd></div>
+      <div><dt>Customer</dt><dd id="rCust"></dd></div>
+      <div><dt>Order total</dt><dd id="rTotal"></dd></div>
+      <div><dt>Total paid</dt><dd id="rPaid"></dd></div>
+      <div class="total"><dt>Remaining balance</dt><dd id="rBal"></dd></div>
+      <div><dt>Status</dt><dd id="rStatus"></dd></div>
+      <div><dt>Last payment</dt><dd id="rLast"></dd></div>
+    </dl>
+    <div class="actions end">
+      <button class="btn-outline" onclick="window.print()">Print</button>
+      <button class="btn" id="closeRcp">Done</button>
+    </div>
+  </div>
+</dialog>
+
+<script src="js/layout.js"></script>
+<script src="js/payments.js"></script>
+</body>
+</html>

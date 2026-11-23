@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gallons &amp; stock · AguaVita</title>
+  <link rel="stylesheet" href="css/app.css">
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+<div class="app">
+
+  <!-- paste SIDEBAR here (Gallons & stock link = class="active") -->
+
+  <div class="main">
+    <!-- paste TOPBAR here -->
+
+    <main class="content">
+      <div class="page-head">
+        <div>
+          <h1>Gallons &amp; stock</h1>
+          <p class="sub">Manage water products, refill prices, and container availability.</p>
+        </div>
+        <div class="actions">
+          <button class="btn-outline" id="adjustBtn">Adjust stock</button>
+          <button class="btn" id="addBtn">+ Add product</button>
+        </div>
+      </div>
+
+      <section class="stats">
+        <article class="card stat"><div><span>Ready for delivery</span><b id="gReady">–</b><small class="link-s">Filled gallons in stock</small></div></article>
+        <article class="card stat"><div><span>Empty containers</span><b id="gEmpty">–</b><small class="link-s">Available for refilling</small></div></article>
+        <article class="card stat"><div><span>Low-stock products</span><b id="gLow">–</b><small class="link-s" id="gLowNote"></small></div></article>
+        <article class="card stat"><div><span>Gallons sold today</span><b id="gSold">–</b><small class="link-s" id="gSoldNote"></small></div></article>
+      </section>
+
+      <section class="products" id="products"></section>
+
+      <section class="card flush">
+        <h3 class="pad">Recent stock movements</h3>
+        <div class="table-wrap">
+          <table class="roomy">
+            <thead><tr><th>Date / time</th><th>Product</th><th>Movement</th><th>Quantity</th><th>Updated by</th><th>Reference</th></tr></thead>
+            <tbody id="rows"></tbody>
+          </table>
+        </div>
+        <div class="pager">
+          <small id="showing"></small>
+          <div><button class="btn-outline" id="prev">Previous</button>
+               <span class="pg" id="pg">1</span>
+               <button class="btn-outline" id="next">Next</button></div>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<!-- Update / adjust stock -->
+<dialog id="stockDlg">
+  <form id="stockForm" method="dialog">
+    <h3>Update stock</h3>
+    <label>Product<select id="prodSel" required></select></label>
+    <label>Movement
+      <select id="moveSel" required>
+        <option value="in">Refill completed (add)</option>
+        <option value="out">Damaged / lost (remove)</option>
+        <option value="fix">Count correction (set exact number)</option>
+      </select>
+    </label>
+    <label><span id="qtyLabel">Quantity</span><input id="qty" type="number" min="0" step="1" required></label>
+    <label>Note (optional)<input id="note" maxlength="120"></label>
+    <div class="total-row"><span>New stock level</span><b id="preview">0</b></div>
+    <p id="stockErr" class="err" hidden></p>
+    <div class="actions end">
+      <button type="button" class="btn-outline" data-close="stockDlg">Cancel</button>
+      <button class="btn" type="submit">Save</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- Add product -->
+<dialog id="addDlg">
+  <form id="addForm" method="dialog">
+    <h3>Add product</h3>
+    <label>Product name<input id="pName" required maxlength="60" placeholder="e.g. Distilled water"></label>
+    <label>Size<input id="pSize" required maxlength="40" value="5-gallon refill"></label>
+    <label>Refill price (₱)<input id="pPrice" type="number" min="1" step="1" required></label>
+    <label>Opening stock<input id="pStock" type="number" min="0" step="1" value="0" required></label>
+    <p id="addErr" class="err" hidden></p>
+    <div class="actions end">
+      <button type="button" class="btn-outline" data-close="addDlg">Cancel</button>
+      <button class="btn" type="submit">Add product</button>
+    </div>
+  </form>
+</dialog>
+
+<script src="js/layout.js"></script>
+<script src="js/gallons.js"></script>
+</body>
+</html>

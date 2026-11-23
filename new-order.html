@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>New order · AguaVita</title>
+  <link rel="stylesheet" href="css/app.css">
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+<div class="app">
+
+  <!-- paste SIDEBAR here (Orders link = class="active") -->
+
+  <div class="main">
+    <!-- paste TOPBAR here -->
+
+    <main class="content">
+      <div class="page-head">
+        <div>
+          <h1>Create a new order</h1>
+          <p class="crumb"><a href="orders.html">Orders</a> / New order</p>
+        </div>
+        <div class="actions">
+          <a class="btn-outline" href="orders.html">Cancel</a>
+          <button class="btn" type="submit" form="orderForm">Save &amp; assign delivery</button>
+        </div>
+      </div>
+
+      <form id="orderForm" class="order-grid" novalidate>
+
+        <!-- LEFT COLUMN -->
+        <div class="stack">
+          <section class="card panel">
+            <h3>1. Customer information</h3>
+            <div class="field">
+              <label for="customer">Select customer</label>
+              <select id="customer" required><option value="">Select customer…</option></select>
+            </div>
+            <div class="two">
+              <div class="field"><label for="phone">Contact number</label>
+                <input id="phone" readonly placeholder="Auto-filled"></div>
+              <div class="field"><label for="address">Delivery address</label>
+                <input id="address" placeholder="Auto-filled, editable"></div>
+            </div>
+            <p class="hint">Not on the list? <a href="customers.html?add=1">+ Add a new customer</a></p>
+          </section>
+
+          <section class="card panel">
+            <h3>2. Order items</h3>
+            <div class="field">
+              <label for="product">Water product</label>
+              <select id="product" required></select>
+            </div>
+            <div class="two">
+              <div class="field"><label for="qty">Quantity</label>
+                <input id="qty" type="number" min="1" max="50" value="1" required></div>
+              <div class="field"><label for="price">Unit price</label>
+                <input id="price" readonly></div>
+            </div>
+
+            <div class="callout">
+              <strong>Bring back empty containers</strong>
+              <div class="inline">
+                <label for="returned">Empty containers returned</label>
+                <input id="returned" type="number" min="0" max="50" value="0">
+              </div>
+              <p id="returnMsg"></p>
+            </div>
+
+            <div class="field">
+              <label for="newCont">New containers needed</label>
+              <input id="newCont" type="number" min="0" max="50" value="0">
+              <small id="depHint"></small>
+            </div>
+            <div class="field">
+              <label for="notes">Order notes (optional)</label>
+              <input id="notes" maxlength="200" placeholder="e.g. Please deliver to the blue gate.">
+            </div>
+          </section>
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div class="stack">
+          <section class="card panel">
+            <h3>Order summary</h3>
+            <dl class="sum">
+              <div><dt id="sumItem">–</dt><dd id="sumItemAmt">₱0.00</dd></div>
+              <div><dt>Container deposit</dt><dd id="sumDep">₱0.00</dd></div>
+              <div class="total"><dt>Order total</dt><dd id="sumTotal">₱0.00</dd></div>
+            </dl>
+            <span class="tag amber">Unpaid</span>
+            <p class="hint">Payment can be recorded after the order is saved.</p>
+          </section>
+
+          <section class="card panel">
+            <h3>3. Delivery assignment</h3>
+            <div class="field"><label for="when">Schedule</label>
+              <input id="when" type="datetime-local" required></div>
+            <div class="field"><label for="route">Delivery route</label>
+              <select id="route" required></select></div>
+            <div class="field"><label for="rider">Assign rider</label>
+              <select id="rider"></select>
+              <small>Only available riders can be assigned.</small></div>
+            <p id="formErr" class="err" hidden></p>
+            <button class="btn" type="submit">Save &amp; assign delivery</button>
+          </section>
+        </div>
+
+      </form>
+    </main>
+  </div>
+</div>
+<script src="js/layout.js"></script>
+<script src="js/new-order.js"></script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reports · AguaVita</title>
+  <link rel="stylesheet" href="css/app.css">
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+<div class="app">
+
+  <!-- paste SIDEBAR here (Reports link = class="active") -->
+
+  <div class="main">
+    <!-- paste TOPBAR here -->
+
+    <main class="content">
+      <div class="page-head">
+        <div>
+          <h1>Reports &amp; insights</h1>
+          <p class="sub">A clear view of station performance and daily collections.</p>
+        </div>
+        <div class="actions">
+          <button class="btn-outline" id="rangeBtn"></button>
+          <input type="date" id="rangeEnd" hidden>
+          <button class="btn" id="exportBtn">Export report</button>
+        </div>
+      </div>
+
+      <section class="stats">
+        <article class="card stat"><div><span>Orders this week</span><b id="kOrders">–</b><small class="link-s" id="kOrdersNote"></small></div></article>
+        <article class="card stat"><div><span>Collections today</span><b id="kCollected">–</b><small class="link-s" id="kCollectedNote"></small></div></article>
+        <article class="card stat"><div><span>Outstanding balances</span><b id="kBalance">–</b><small class="link-s" id="kBalanceNote"></small></div></article>
+        <article class="card stat"><div><span>Completion today</span><b id="kRate">–</b><small class="link-s" id="kRateNote"></small></div></article>
+      </section>
+
+      <div class="grid-2">
+        <section class="card">
+          <div class="card-head">
+            <div><h3>Order volume</h3><small>Keeping your community hydrated, one delivery at a time</small></div>
+            <select id="range"><option value="7">Last 7 days</option><option value="30">Last 30 days</option></select>
+          </div>
+          <div id="chart" class="chart"></div>
+          <p class="legend"><i class="k delivered"></i>Delivered <i class="k progress"></i>In progress</p>
+          <p class="chart-foot"><span id="chartSummary"></span><span id="chartRange"></span></p>
+        </section>
+
+        <section class="card">
+          <h3>Today at a glance</h3>
+          <dl class="glance">
+            <div><dt>Delivered orders</dt><dd id="gDelivered">–</dd></div>
+            <div><dt>On the road</dt><dd id="gRoad">–</dd></div>
+            <div><dt>Awaiting dispatch</dt><dd id="gWait">–</dd></div>
+            <div><dt>Gallons sold</dt><dd id="gGallons">–</dd></div>
+          </dl>
+          <small id="updated"></small>
+        </section>
+      </div>
+
+      <section class="card flush">
+        <h3 class="pad">Daily delivery performance</h3>
+        <div class="table-wrap">
+          <table class="roomy">
+            <thead><tr><th>Route</th><th>Rider</th><th>Delivered</th><th>On route</th><th>Completion</th><th>Collections</th></tr></thead>
+            <tbody id="rows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <p class="foot">Collections exclude refundable container deposits. Reports use recorded orders and payments.</p>
+    </main>
+  </div>
+</div>
+<script src="js/layout.js"></script>
+<script src="js/reports.js"></script>
+</body>
+</html>

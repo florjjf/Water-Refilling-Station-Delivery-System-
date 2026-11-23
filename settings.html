@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Accounts &amp; settings · AguaVita</title>
+  <link rel="stylesheet" href="css/app.css">
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+<div class="app">
+
+  <!-- paste SIDEBAR here (Settings link = class="active") -->
+
+  <div class="main">
+    <!-- paste TOPBAR here -->
+
+    <main class="content">
+      <div class="page-head">
+        <div>
+          <h1>Accounts &amp; settings</h1>
+          <p class="sub">Manage station information and role-based access.</p>
+        </div>
+        <div class="actions">
+          <span id="saved" class="ok" hidden>Settings saved</span>
+          <button class="btn-outline" id="saveBtn" form="stationForm" type="submit">Save settings</button>
+          <button class="btn" id="createBtn">+ Create account</button>
+        </div>
+      </div>
+
+      <div class="grid-2 settings-top">
+        <form id="stationForm" class="card panel" novalidate>
+          <h3>Station information</h3>
+          <div class="field"><label for="sName">Station name</label>
+            <input id="sName" required maxlength="80"></div>
+          <div class="two">
+            <div class="field"><label for="sLoc">Location</label>
+              <input id="sLoc" required maxlength="120"></div>
+            <div class="field"><label for="sPhone">Contact number</label>
+              <input id="sPhone" required pattern="09\d{2} ?\d{3} ?\d{4}" title="11 digits starting with 09"></div>
+          </div>
+          <p id="stationErr" class="err" hidden></p>
+        </form>
+
+        <section class="card panel">
+          <h3>Access by role</h3>
+          <dl class="access">
+            <div><dt>Owner</dt><dd>Full access to all station records and accounts.</dd></div>
+            <div><dt>Staff / Cashier</dt><dd>Manage customers, orders, payments, and deposits.</dd></div>
+            <div><dt>Delivery rider</dt><dd>View assigned deliveries and update their status only.</dd></div>
+          </dl>
+        </section>
+      </div>
+
+      <section class="card flush">
+        <h3 class="pad">User accounts</h3>
+        <div class="table-wrap">
+          <table class="roomy">
+            <thead><tr><th>Account</th><th>Role</th><th>Access</th><th>Status</th><th>Action</th></tr></thead>
+            <tbody id="rows"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<!-- Create account -->
+<dialog id="createDlg">
+  <form id="createForm" method="dialog">
+    <h3>Create account</h3>
+    <label>Full name<input id="cName" required maxlength="80"></label>
+    <label>Email or username<input id="cUser" required maxlength="80" autocomplete="off"></label>
+    <label>Role
+      <select id="cRole" required>
+        <option value="staff">Staff / Cashier</option>
+        <option value="rider">Delivery rider</option>
+        <option value="owner">Owner</option>
+      </select>
+    </label>
+    <label>Temporary password<input id="cPass" type="password" minlength="8" required autocomplete="new-password"></label>
+    <p class="hint" id="riderHint" hidden>Add the rider’s contact number and route on the Riders page after creating the account.</p>
+    <p class="hint">The user must change this password at first sign-in.</p>
+    <p id="createErr" class="err" hidden></p>
+    <div class="actions end">
+      <button type="button" class="btn-outline" data-close="createDlg">Cancel</button>
+      <button class="btn" type="submit">Create account</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- Manage account -->
+<dialog id="manageDlg">
+  <form id="manageForm" method="dialog">
+    <h3 id="mTitle">Manage account</h3>
+    <label>Email or username<input id="mUser" readonly></label>
+    <label>Role
+      <select id="mRole">
+        <option value="owner">Owner</option>
+        <option value="staff">Staff / Cashier</option>
+        <option value="rider">Delivery rider</option>
+      </select>
+    </label>
+    <label class="check"><input type="checkbox" id="mActive"> Account is active</label>
+    <div class="callout">
+      <strong>Password</strong>
+      <button type="button" class="btn-outline small" id="resetBtn">Reset password</button>
+      <p id="resetOut" hidden></p>
+    </div>
+    <p id="manageErr" class="err" hidden></p>
+    <div class="actions end">
+      <button type="button" class="btn-outline" data-close="manageDlg">Close</button>
+      <button class="btn" type="submit">Save changes</button>
+    </div>
+  </form>
+</dialog>
+
+<script src="js/layout.js"></script>
+<script src="js/settings.js"></script>
+</body>
+</html>

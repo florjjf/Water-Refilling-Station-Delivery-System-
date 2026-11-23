@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Overview · AguaVita</title>
+  <link rel="stylesheet" href="css/app.css">
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+<div class="app">
+
+  <!-- SIDEBAR (copy this block into every page) -->
+  <aside class="sidebar">
+    <div class="logo">
+      <img src="images/logo.svg" alt="" width="32" height="32">
+      <div><strong>AguaVita</strong><small>DELIVERY MANAGER</small></div>
+    </div>
+    <p class="nav-label">WORKSPACE</p>
+    <nav id="nav">
+      <a href="dashboard.html" class="active" data-roles="owner,staff"><i data-lucide="layout-grid"></i>Overview</a>
+      <a href="orders.html"     data-roles="owner,staff"><i data-lucide="shopping-bag"></i>Orders <span class="badge" id="orderBadge">6</span></a>
+      <a href="deliveries.html" data-roles="owner,staff,rider"><i data-lucide="truck"></i>Deliveries</a>
+      <a href="customers.html"  data-roles="owner,staff"><i data-lucide="users"></i>Customers</a>
+      <a href="payments.html"   data-roles="owner,staff"><i data-lucide="credit-card"></i>Payments</a>
+      <a href="gallons.html"    data-roles="owner,staff"><i data-lucide="droplet"></i>Gallons &amp; stock</a>
+      <a href="deposits.html"   data-roles="owner,staff"><i data-lucide="package"></i>Container deposits</a>
+      <a href="riders.html"     data-roles="owner"><i data-lucide="bike"></i>Riders</a>
+      <a href="routes.html"     data-roles="owner,staff"><i data-lucide="route"></i>Routes</a>
+      <a href="reports.html"    data-roles="owner"><i data-lucide="bar-chart-3"></i>Reports</a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <div class="station-open"><strong><span class="dot"></span>Station is open</strong>
+        <small>Serving until 6:00 PM</small></div>
+      <a href="settings.html" data-roles="owner"><i data-lucide="settings"></i>Settings</a>
+      <div class="me">
+        <span class="avatar" id="meInitials">SA</span>
+        <div><strong id="meName">Station admin</strong><small id="meRole">Owner account</small></div>
+        <button id="logout" title="Sign out"><i data-lucide="log-out"></i></button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+    <header class="topbar">
+      <span><i data-lucide="map-pin"></i> <strong>Brgy. 10, Impalambong</strong> <small>Malaybalay City</small></span>
+      <div class="topbar-right">
+        <label class="search"><i data-lucide="search"></i><input placeholder="Search anything…"></label>
+        <button class="icon-btn"><i data-lucide="bell"></i></button>
+        <span class="pill" id="workspaceTag">Admin workspace</span>
+      </div>
+    </header>
+
+    <main class="content">
+      <div class="page-head">
+        <div>
+          <h1>Station overview</h1>
+          <p class="sub">A clear view of your orders, deliveries, and collections today.</p>
+        </div>
+        <div class="actions">
+          <button class="btn-outline"><i data-lucide="calendar"></i><span id="today"></span></button>
+          <a class="btn" href="orders.html?new=1"><i data-lucide="plus"></i>New order</a>
+        </div>
+      </div>
+
+      <!-- stat cards -->
+      <section class="stats">
+        <article class="card stat"><div><span>Total orders</span><b id="sTotal">–</b><small id="sTotalNote"></small></div><i data-lucide="clipboard-list"></i></article>
+        <article class="card stat"><div><span>Out for delivery</span><b id="sOut">–</b><small id="sOutNote"></small></div><i data-lucide="truck"></i></article>
+        <article class="card stat"><div><span>Collected today</span><b id="sCollected">–</b><small id="sCollectedNote"></small></div><i data-lucide="wallet"></i></article>
+        <article class="card stat"><div><span>Outstanding balance</span><b id="sBalance">–</b><small id="sBalanceNote"></small></div><i data-lucide="clock"></i></article>
+      </section>
+
+      <div class="grid-2">
+        <section class="card">
+          <div class="card-head">
+            <div><h3>Order volume</h3><small>Keeping your community hydrated, one delivery at a time</small></div>
+            <select id="range"><option value="7">Last 7 days</option><option value="30">Last 30 days</option></select>
+          </div>
+          <div id="chart" class="chart"></div>
+          <p class="legend"><i class="k delivered"></i>Delivered <i class="k progress"></i>In progress</p>
+        </section>
+
+        <section class="card">
+          <div class="card-head"><h3>Delivery team</h3><span class="tag green">3 active</span></div>
+          <ul id="team" class="team"></ul>
+          <a class="link" href="deliveries.html">Manage deliveries →</a>
+        </section>
+      </div>
+
+      <div class="grid-2">
+        <section class="card">
+          <div class="card-head"><h3>Recent orders</h3>
+            <button class="btn-outline small"><i data-lucide="filter"></i>Filter</button></div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Order ID</th><th>Customer</th><th>Gallons</th><th>Amount</th><th>Delivery</th><th>Payment</th><th></th></tr></thead>
+              <tbody id="orders"></tbody>
+            </table>
+          </div>
+          <a class="link right" href="orders.html">View all orders →</a>
+        </section>
+
+        <div class="stack">
+          <section class="card warn">
+            <h3>Collections to follow up</h3>
+            <b class="big" id="followAmt">–</b> <small>outstanding</small>
+            <p id="followNote"></p>
+            <a class="link" href="payments.html">View balances →</a>
+          </section>
+          <section class="card">
+            <h3>Container deposits</h3>
+            <b class="big" id="depCount">–</b> <small id="depNote"></small>
+            <a class="link" href="deposits.html">Manage deposits →</a>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+<script src="js/layout.js"></script>
+<script src="js/dashboard.js"></script>
+</body>
+</html>

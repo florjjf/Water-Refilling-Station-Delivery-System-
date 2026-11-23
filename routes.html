@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Routes · AguaVita</title>
+  <link rel="stylesheet" href="css/app.css">
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+<div class="app">
+
+  <!-- paste SIDEBAR here (Routes link = class="active") -->
+
+  <div class="main">
+    <!-- paste TOPBAR here -->
+
+    <main class="content">
+      <div class="page-head">
+        <div>
+          <h1>Delivery routes</h1>
+          <p class="sub">Organize service areas and keep rider assignments clear.</p>
+        </div>
+        <div class="actions">
+          <button class="btn" id="addBtn">+ Add route</button>
+        </div>
+      </div>
+
+      <section class="stats">
+        <article class="card stat"><div><span>Active routes</span><b id="sRoutes">–</b><small class="link-s">Serving Barangay 10</small></div></article>
+        <article class="card stat"><div><span>Puroks covered</span><b id="sPuroks">–</b><small class="link-s">Impalambong, Malaybalay City</small></div></article>
+        <article class="card stat"><div><span>Assigned riders</span><b id="sRiders">–</b><small class="link-s">One rider per active route</small></div></article>
+        <article class="card stat"><div><span>Pending assignment</span><b id="sPending">–</b><small class="link-s">Orders ready for dispatch</small></div></article>
+      </section>
+
+      <section class="products" id="cards"></section>
+
+      <section class="card flush">
+        <h3 class="pad">Route directory</h3>
+        <div class="table-wrap">
+          <table class="roomy">
+            <thead><tr><th>Route</th><th>Destination</th><th>Coverage notes</th><th>Assigned rider</th><th>Status</th><th>Action</th></tr></thead>
+            <tbody id="rows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <aside class="card info">
+        <strong>Simple, station-managed routing</strong>
+        <p>Delivery areas and rider assignments are managed by your team. A third-party map service is not required.</p>
+      </aside>
+    </main>
+  </div>
+</div>
+
+<!-- Add / edit route -->
+<dialog id="routeDlg">
+  <form id="routeForm" method="dialog">
+    <h3 id="dlgTitle">Add route</h3>
+    <label>Route name<input id="rName" required maxlength="30" placeholder="Route D"></label>
+    <label>Destination (puroks)<input id="rDest" required maxlength="40" placeholder="Purok 7–8"></label>
+    <label>Coverage notes<input id="rNotes" maxlength="120" placeholder="Residential deliveries, main road"></label>
+    <label>Assigned rider<select id="rRider"></select></label>
+    <label class="check"><input type="checkbox" id="rActive" checked> Active route</label>
+    <p id="formErr" class="err" hidden></p>
+    <div class="actions end">
+      <button type="button" class="btn-outline" id="cancel">Cancel</button>
+      <button class="btn" type="submit">Save route</button>
+    </div>
+  </form>
+</dialog>
+
+<script src="js/layout.js"></script>
+<script src="js/routes.js"></script>
+</body>
+</html>

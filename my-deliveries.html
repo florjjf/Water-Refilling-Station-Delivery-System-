@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My deliveries · AguaVita</title>
+  <link rel="stylesheet" href="css/app.css">
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+</head>
+<body data-allow="rider">
+<div class="app">
+
+  <!-- paste SIDEBAR here, plus this link at the top of <nav id="nav">: -->
+  <!-- <a href="my-deliveries.html" class="active" data-roles="rider"><i data-lucide="truck"></i>My deliveries</a> -->
+
+  <div class="main">
+    <!-- paste TOPBAR here -->
+
+    <main class="content">
+      <div class="page-head">
+        <div>
+          <h1>My deliveries</h1>
+          <p class="sub" id="greeting"></p>
+        </div>
+        <div class="actions"><span class="btn" id="today"></span></div>
+      </div>
+
+      <section class="stats">
+        <article class="card stat"><div><span>Assigned today</span><b id="kAssigned">–</b><small class="link-s" id="kRoute"></small></div></article>
+        <article class="card stat"><div><span>On route</span><b id="kRoad">–</b><small class="link-s" id="kNext"></small></div></article>
+        <article class="card stat"><div><span>Completed</span><b id="kDone">–</b><small class="link-s" id="kCheer"></small></div></article>
+        <article class="card stat"><div><span>Gallons to deliver</span><b id="kGallons">–</b><small class="link-s" id="kStops"></small></div></article>
+      </section>
+
+      <div class="rider-grid">
+        <section class="card panel">
+          <h3>Your remaining stops</h3>
+          <div id="stops" class="stops"></div>
+          <p id="empty" class="hint" hidden>All deliveries are complete. Great work today!</p>
+        </section>
+
+        <section class="card panel detail" id="detail">
+          <div class="top"><h3 id="dOrder"></h3><span class="tag" id="dTag"></span></div>
+          <h2 id="dName"></h2>
+          <p class="addr" id="dAddr"></p>
+          <a class="phone" id="dPhone" href="#"></a>
+          <strong id="dItems"></strong>
+
+          <div class="callout">
+            <strong>Delivery instructions</strong>
+            <p id="dNotes"></p>
+          </div>
+
+          <div class="field"><label for="status">Update delivery status</label>
+            <select id="status"></select></div>
+          <div class="field"><label for="note">Delivery note (optional)</label>
+            <input id="note" maxlength="200" placeholder="Add a note about this delivery"></div>
+          <p id="err" class="err" hidden></p>
+          <button class="btn" id="confirm" type="button"></button>
+          <small>You can update only deliveries assigned to you.</small>
+        </section>
+      </div>
+      <div id="toast" class="toast" role="status" hidden></div>
+    </main>
+  </div>
+</div>
+<script src="js/layout.js"></script>
+<script src="js/my-deliveries.js"></script>
+</body>
+</html>

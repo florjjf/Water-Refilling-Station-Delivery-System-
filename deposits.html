@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Container deposits · AguaVita</title>
+  <link rel="stylesheet" href="css/app.css">
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+<div class="app">
+
+  <!-- paste SIDEBAR here (Container deposits link = class="active") -->
+
+  <div class="main">
+    <!-- paste TOPBAR here -->
+
+    <main class="content">
+      <div class="page-head">
+        <div>
+          <h1>Container deposits</h1>
+          <p class="sub">Track borrowed containers, deposits received, and returns.</p>
+        </div>
+        <div class="actions">
+          <button class="btn-outline" id="returnBtn">Record return</button>
+          <button class="btn" id="depositBtn">+ Record deposit</button>
+        </div>
+      </div>
+
+      <section class="stats">
+        <article class="card stat"><div><span>Containers with customers</span><b id="sHeld">–</b><small class="link-s" id="sAccounts"></small></div></article>
+        <article class="card stat"><div><span>Deposit funds held</span><b id="sFunds">–</b><small class="link-s" id="sFundsNote"></small></div></article>
+        <article class="card stat"><div><span>Returned this month</span><b id="sReturned">–</b><small class="link-s" id="sRefunded"></small></div></article>
+        <article class="card stat"><div><span>Deposit per container</span><b id="sRate">–</b><small class="link-s">Refundable upon return</small></div></article>
+      </section>
+
+      <div class="toolbar">
+        <div class="chips" id="chips">
+          <button class="chip on" data-f="all">All deposits</button>
+          <button class="chip" data-f="Held">Held</button>
+          <button class="chip" data-f="Refunded">Refunded</button>
+        </div>
+        <div class="toolbar-right">
+          <input id="q" class="plain" type="search" placeholder="Search customer or deposit">
+          <button class="btn-outline">Filter</button>
+        </div>
+      </div>
+
+      <section class="card flush">
+        <h3 class="pad">Container deposit ledger</h3>
+        <div class="table-wrap">
+          <table class="roomy">
+            <thead><tr><th>Deposit / customer</th><th>Containers</th><th>Amount</th><th>Recorded</th><th>Status</th><th>Action</th></tr></thead>
+            <tbody id="rows"></tbody>
+          </table>
+        </div>
+        <div class="pager">
+          <small id="showing"></small>
+          <div><button class="btn-outline" id="prev">Previous</button>
+               <span class="pg" id="pg">1</span>
+               <button class="btn-outline" id="next">Next</button></div>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<!-- Record deposit -->
+<dialog id="depDlg">
+  <form id="depForm" method="dialog">
+    <h3>Record deposit</h3>
+    <label>Customer<select id="custSel" required></select></label>
+    <label>Containers borrowed<input id="depQty" type="number" min="1" max="50" value="1" required></label>
+    <div class="total-row"><span>Deposit received</span><b id="depAmt">₱0</b></div>
+    <p id="depErr" class="err" hidden></p>
+    <div class="actions end">
+      <button type="button" class="btn-outline" data-close="depDlg">Cancel</button>
+      <button class="btn" type="submit">Save deposit</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- Record return -->
+<dialog id="retDlg">
+  <form id="retForm" method="dialog">
+    <h3>Record return</h3>
+    <label>Held deposit<select id="heldSel" required></select></label>
+    <label>Containers returned<input id="retQty" type="number" min="1" value="1" required></label>
+    <div class="total-row"><span>Refund to customer</span><b id="refAmt">₱0</b></div>
+    <p id="retErr" class="err" hidden></p>
+    <div class="actions end">
+      <button type="button" class="btn-outline" data-close="retDlg">Cancel</button>
+      <button class="btn" type="submit">Confirm return</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- View record (refunded) -->
+<dialog id="viewDlg">
+  <div class="receipt">
+    <h3>Deposit record</h3>
+    <dl id="viewBody"></dl>
+    <div class="actions end"><button class="btn" data-close="viewDlg">Close</button></div>
+  </div>
+</dialog>
+
+<script src="js/layout.js"></script>
+<script src="js/deposits.js"></script>
+</body>
+</html>

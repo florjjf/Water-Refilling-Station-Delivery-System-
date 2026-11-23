@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign in · AguaVita Delivery Manager</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main class="split">
+
+    <!-- LEFT: brand panel -->
+    <section class="brand">
+      <div class="brand-top">
+        <div class="logo">
+          <img src="images/logo.svg" alt="" width="36" height="36">
+          <div><strong>AguaVita</strong><small>DELIVERY MANAGER</small></div>
+        </div>
+        <h1>Water for Life.<br>Care in Every Drop.</h1>
+        <p>One place for every order, delivery,<br>and customer in your community.</p>
+      </div>
+      <img class="hero" src="images/bottles.png" alt="AguaVita water gallons">
+      <footer><span>BARANGAY 10, IMPALAMBONG</span><span>MALAYBALAY CITY</span></footer>
+    </section>
+
+    <!-- RIGHT: form -->
+    <section class="form-side">
+      <form id="loginForm" novalidate>
+        <h2>Welcome back</h2>
+        <p class="sub">Sign in to manage your water deliveries.</p>
+
+        <label for="username">Email or username</label>
+        <input id="username" name="username" type="text" autocomplete="username"
+               placeholder="Enter your email or username" required>
+
+        <label for="password">Password</label>
+        <div class="pw">
+          <input id="password" name="password" type="password" autocomplete="current-password"
+                 placeholder="Enter your password" required>
+          <button type="button" id="toggle">Show</button>
+        </div>
+
+        <p id="error" role="alert" hidden></p>
+        <button type="submit" class="primary">Sign In</button>
+
+        <div class="note">
+          <strong>The right access for your role</strong>
+          <span>Owners, staff, and delivery riders are directed to their permitted workspace after signing in.</span>
+        </div>
+        <p class="help"><a href="#">Need an Account or Password Reset?</a><br>
+          <span>Contact your Station Administrator.</span></p>
+      </form>
+    </section>
+
+  </main>
+  <script src="js/login.js"></script>
+</body>
+</html>

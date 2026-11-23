@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Riders · AguaVita</title>
+  <link rel="stylesheet" href="css/app.css">
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+<div class="app">
+
+  <!-- paste SIDEBAR here (Riders link = class="active") -->
+
+  <div class="main">
+    <!-- paste TOPBAR here -->
+
+    <main class="content">
+      <div class="page-head">
+        <div>
+          <h1>Delivery riders</h1>
+          <p class="sub">Manage rider details, availability, and daily workload.</p>
+        </div>
+        <div class="actions">
+          <button class="btn-outline" id="exportBtn">Export</button>
+          <button class="btn" id="addBtn">+ Add rider</button>
+        </div>
+      </div>
+
+      <section class="stats">
+        <article class="card stat"><div><span>Registered riders</span><b id="rTotal">–</b><small class="link-s" id="rNote"></small></div></article>
+        <article class="card stat"><div><span>Deliveries in progress</span><b id="rProgress">–</b><small class="link-s">Assigned across active riders</small></div></article>
+        <article class="card stat"><div><span>Completed today</span><b id="rDone">–</b><small class="link-s">Updated by assigned riders</small></div></article>
+        <article class="card stat"><div><span>Unassigned deliveries</span><b id="rUnassigned">–</b><small class="link-s">Waiting for dispatch</small></div></article>
+      </section>
+
+      <section class="products" id="cards"></section>
+
+      <section class="card flush">
+        <h3 class="pad">Rider directory</h3>
+        <div class="table-wrap">
+          <table class="roomy">
+            <thead><tr><th>Rider</th><th>Contact</th><th>Assigned route</th><th>Today’s deliveries</th><th>Availability</th><th>Action</th></tr></thead>
+            <tbody id="rows"></tbody>
+          </table>
+        </div>
+        <div class="pager">
+          <small id="showing"></small>
+          <div><button class="btn-outline" id="prev">Previous</button>
+               <span class="pg" id="pg">1</span>
+               <button class="btn-outline" id="next">Next</button></div>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<!-- Add / edit rider -->
+<dialog id="riderDlg">
+  <form id="riderForm" method="dialog">
+    <h3 id="dlgTitle">Add rider</h3>
+    <label>Full name<input id="rName" required maxlength="80"></label>
+    <label>Contact number<input id="rPhone" required pattern="09\d{2} ?\d{3} ?\d{4}" placeholder="0917 800 1001" title="11 digits starting with 09"></label>
+    <label>Assigned route<select id="rRoute"></select></label>
+    <label class="check"><input type="checkbox" id="rOff"> Off duty</label>
+
+    <div id="accountBox" class="callout">
+      <strong>Login account</strong>
+      <label>Username<input id="rUser" maxlength="40" autocomplete="off"></label>
+      <label>Temporary password<input id="rPass" type="password" minlength="8" autocomplete="new-password"></label>
+      <p>The rider must change this password at first sign-in.</p>
+    </div>
+
+    <p id="formErr" class="err" hidden></p>
+    <div class="actions end">
+      <button type="button" class="btn-outline" data-close="riderDlg">Cancel</button>
+      <button class="btn" type="submit">Save rider</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- View rider -->
+<dialog id="viewDlg">
+  <div class="receipt">
+    <h3 id="vTitle">Rider</h3>
+    <dl id="vBody"></dl>
+    <div class="actions end">
+      <a class="btn-outline" id="vLink" href="#">View assignments</a>
+      <button class="btn" data-close="viewDlg">Close</button>
+    </div>
+  </div>
+</dialog>
+
+<script src="js/layout.js"></script>
+<script src="js/riders.js"></script>
+</body>
+</html>
